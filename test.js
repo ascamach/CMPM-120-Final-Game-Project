@@ -51,29 +51,50 @@ class Test extends Phaser.Scene {
         this.onEnter();
     }
 
-
     // Function to add dialogue to scene
     add_dialogue(start) {
 
         let current_node = start;
         let text_index = 0;
+        let char_index = 0;
+
+        let current_text = "";
 
         let node = this.dialogue_text[current_node];
 
-        let dia_text = this.add.text(100, 600, node.text[text_index]);
+        let dia_text = this.add.text(75, 510, "")
+            .setWordWrapWidth(600)
+            .setFontSize(25);
+
+        this.time.addEvent({
+            callback: () => {
+                current_text += (node.text[text_index])[char_index];
+                dia_text.setText(current_text);
+                char_index++;
+            },
+            repeat: node.text[text_index].length-1,
+            delay: 40
+        });
 
         this.input.on('pointerdown', () => {
+            current_text = "";
+            char_index = 0;
             if (text_index == node.text.length-1) {
-                dia_text.destroy();
                 current_node = node.next;
                 node = this.dialogue_text[current_node];
                 text_index = 0;
-                dia_text = this.add.text(100, 600, node.text[text_index]);
             } else {
-                dia_text.destroy();
                 text_index++;
             }
-            dia_text = this.add.text(100, 600, node.text[text_index]);
+            this.time.addEvent({
+                callback: () => {
+                    current_text += (node.text[text_index])[char_index];
+                    dia_text.setText(current_text);
+                    char_index++;
+                },
+                repeat: node.text[text_index].length-1,
+                delay: 40
+            });
         });
     }
 };
