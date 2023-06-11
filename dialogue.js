@@ -4,6 +4,6 @@ class Test2 extends Test {
     }
 
     onEnter() {
-        
+        this.add_dialogue('test');
     }
 }
