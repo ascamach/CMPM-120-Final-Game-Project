@@ -5,9 +5,9 @@ class Test extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image("pizza", "assets/test_pizza.jpg");
-        this.load.image("shinji", "assets/test_" + "shinji" + ".png");
-        this.load.json("dialogue", "assets/test_dialogue.json");
+        this.load.image("pizza", "./assets/test_pizza.jpg");
+        this.load.image("shinji", "./assets/test_" + "shinji" + ".png");
+        this.load.json("dialogue", "./assets/test_dialogue.json");
         this.load.audio("click", ["./assets/textEnd.wav"]);
     }
 
