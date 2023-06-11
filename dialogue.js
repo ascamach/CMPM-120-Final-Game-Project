@@ -14,7 +14,9 @@ class Test_End extends Phaser.Scene {
     }
 
     create() {
-        this.add.text(100, 100, "This is the end of the dialogue");
+        this.add.text(50, 100, "This is the end of the dialogue").setFontSize(25);
+
+        this.add.text(50, 200, "Click again to loop prototype.");
 
         this.input.on('pointerdown', () => {
             this.scene.start("test2");
