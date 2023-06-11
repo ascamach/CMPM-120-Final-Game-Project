@@ -60,6 +60,7 @@ class Test extends Phaser.Scene {
 
         var test_music = this.sound.add("test_music").setVolume(0.1);
         test_music.play();
+        test_music.setLoop(true);
 
         let current_text = "";
         let name = this.add.text(55, 456, "", {
