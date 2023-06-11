@@ -8,6 +8,7 @@ class Test extends Phaser.Scene {
         this.load.image("pizza", "assets/test_pizza.jpg");
         this.load.image("shinji", "assets/test_" + "shinji" + ".png");
         this.load.json("dialogue", "assets/test_dialogue.json");
+        this.load.audio("click", ["./assets/textEnd.wav"]);
     }
 
     create() {
@@ -54,6 +55,8 @@ class Test extends Phaser.Scene {
         let text_index = 0;
         let char_index = 0;
 
+        const ping = this.sound.add("click");
+
         let current_text = "";
         let name = this.add.text(55, 456, "", {
             fontSize: 40,
@@ -69,13 +72,39 @@ class Test extends Phaser.Scene {
         name.setText(node.name);
 
         this.input.on('pointerdown', () => {
+            ping.play();
             current_text = "";
             char_index = 0;
 
             if (text_index == node.text.length-1) {
                 if (node.next == "end") {
                         dia_text.destroy();
-                        this.scene.start("test_end");
+                        this.go_to_scene("test_end");
+                } else if (node.next == "action") {
+                    let option_a = this.add.rectangle(400, 150, 400, 50, 0x000000, 50)
+                        .setInteractive()
+                        .on('pointerdown', () => {
+                            current_node = "testa";
+                            node = this.dialogue_text[current_node];
+                            text_index = 0;
+                            option_a.destroy();
+                            option_b.destroy();
+                            a_text.destroy();
+                            b_text.destroy();
+                        });
+                    let a_text = this.add.text(350, 145, "Option A");
+                    let b_text = this.add.text(350, 245, "Option B");
+                    let option_b = this.add.rectangle(400, 250, 400, 50, 0x000000, 50)
+                        .setInteractive()
+                        .on('pointerdown', () => {
+                            current_node = "testb";
+                            node = this.dialogue_text[current_node];
+                            text_index = 0;
+                            option_a.destroy();
+                            option_b.destroy();
+                            a_text.destroy();
+                            b_text.destroy();
+                        });
                 } else {
                     current_node = node.next;
                     node = this.dialogue_text[current_node];
@@ -86,6 +115,13 @@ class Test extends Phaser.Scene {
             }
             name.setText(node.name);
             dia_text.setText(node.text[text_index]);
-        });     
+        });
+    }
+
+    go_to_scene(key) {
+        this.cameras.main.fadeOut(1000, 0, 0, 0);
+        this.time.delayedCall(1000, () => {
+            this.scene.start(key);
+        });
     }
 };

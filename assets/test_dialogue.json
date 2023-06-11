@@ -2,12 +2,22 @@
     "dialogue": {
         "test":{
             "name": "Thea",
-            "text": ["Testing dialogue from JSON file.", "Scrolling through text until end of screen."],
+            "text": ["Hello! This is our gameplay prototype.", "This section is for dialogue amongst our characters."],
             "next": "test2"
         },
         "test2":{
             "name": "",
-            "text": ["This is the next message from the previous message."],
+            "text": ["We plan on using Renjs for our dialogue scenes, but this is what we have so far!", "We'll have actual actions later, but for now, each button will lead to the end."],
+            "next": "action"
+        },
+        "testa": {
+            "name": "",
+            "text": ["", "You have selected option A. Thanks!"],
+            "next": "end"
+        },
+        "testb": {
+            "name": "",
+            "text": ["", "You have selected option B. Thanks!"],
             "next": "end"
         }
     }
