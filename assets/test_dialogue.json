@@ -6,7 +6,9 @@
             "next": "test2"
         },
         "test2":{
-            "text": ["This is the next message from the previous message."]
+            "name": "",
+            "text": ["This is the next message from the previous message."],
+            "next": "end"
         }
     }
 }

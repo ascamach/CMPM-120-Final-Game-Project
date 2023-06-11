@@ -4,10 +4,6 @@ class Test extends Phaser.Scene {
         this.points = data.points || [];
     }
 
-    constructor() {
-        super('test');
-    }
-
     preload() {
         this.load.image("pizza", "assets/test_pizza.jpg");
         this.load.image("shinji", "assets/test_" + "shinji" + ".png");
@@ -80,6 +76,9 @@ class Test extends Phaser.Scene {
             current_text = "";
             char_index = 0;
             if (text_index == node.text.length-1) {
+                if (node.next == "end") {
+                    this.scene.start("test_end");
+                }
                 current_node = node.next;
                 node = this.dialogue_text[current_node];
                 text_index = 0;
