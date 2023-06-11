@@ -9,6 +9,7 @@ class Test extends Phaser.Scene {
         this.load.image("shinji", "./assets/test_" + "shinji" + ".png");
         this.load.json("dialogue", "./assets/test_dialogue.json");
         this.load.audio("click", ["./assets/textEnd.wav"]);
+        this.load.audio("test_music", ["./assets/test_music.mp3"]);
     }
 
     create() {
@@ -57,6 +58,9 @@ class Test extends Phaser.Scene {
 
         const ping = this.sound.add("click");
 
+        var test_music = this.sound.add("test_music").setVolume(0.1);
+        test_music.play();
+
         let current_text = "";
         let name = this.add.text(55, 456, "", {
             fontSize: 40,
@@ -69,6 +73,16 @@ class Test extends Phaser.Scene {
             .setWordWrapWidth(600)
             .setFontSize(25);
 
+        this.time.addEvent({
+            callback: () => {
+                current_text += (node.text[text_index])[char_index];
+                dia_text.setText(current_text);
+                char_index++;
+            },
+            repeat: node.text[text_index].length-1,
+            delay: 40
+        });
+
         name.setText(node.name);
 
         this.input.on('pointerdown', () => {
@@ -79,6 +93,7 @@ class Test extends Phaser.Scene {
             if (text_index == node.text.length-1) {
                 if (node.next == "end") {
                         dia_text.destroy();
+                        test_music.stop();
                         this.go_to_scene("test_end");
                 } else if (node.next == "action") {
                     let option_a = this.add.rectangle(400, 150, 400, 50, 0x000000, 50)
