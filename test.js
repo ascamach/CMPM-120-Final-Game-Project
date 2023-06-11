@@ -31,15 +31,15 @@ class Test extends Phaser.Scene {
         let nameplate = this.add.graphics();
         nameplate.lineStyle(2, 0x000000, 2);
         nameplate.fillStyle(0xD3D3D3, 1);
-        nameplate.strokeRoundedRect(45, 445, 200, 55, {
+        nameplate.strokeRoundedRect(45, 455, 200, 45, {
             tl: 0,
             tr: 32,
             bl: 16,
             br: 0
         });
-        nameplate.fillRoundedRect(45, 445, 200, 55, {
+        nameplate.fillRoundedRect(45, 455, 200, 45, {
             tl: 0,
-            tr: 32,
+            tr: 25,
             bl: 16,
             br: 0
         });
@@ -55,45 +55,37 @@ class Test extends Phaser.Scene {
         let char_index = 0;
 
         let current_text = "";
+        let name = this.add.text(55, 456, "", {
+            fontSize: 40,
+            color: '#000000'
+        });
 
         let node = this.dialogue_text[current_node];
 
-        let dia_text = this.add.text(75, 510, "")
+        let dia_text = this.add.text(65, 510, node.text[text_index])
             .setWordWrapWidth(600)
             .setFontSize(25);
 
-        this.time.addEvent({
-            callback: () => {
-                current_text += (node.text[text_index])[char_index];
-                dia_text.setText(current_text);
-                char_index++;
-            },
-            repeat: node.text[text_index].length-1,
-            delay: 40
-        });
+        name.setText(node.name);
 
         this.input.on('pointerdown', () => {
             current_text = "";
             char_index = 0;
+
             if (text_index == node.text.length-1) {
                 if (node.next == "end") {
-                    this.scene.start("test_end");
+                        dia_text.destroy();
+                        this.scene.start("test_end");
+                } else {
+                    current_node = node.next;
+                    node = this.dialogue_text[current_node];
+                    text_index = 0;
                 }
-                current_node = node.next;
-                node = this.dialogue_text[current_node];
-                text_index = 0;
             } else {
                 text_index++;
             }
-            this.time.addEvent({
-                callback: () => {
-                    current_text += (node.text[text_index])[char_index];
-                    dia_text.setText(current_text);
-                    char_index++;
-                },
-                repeat: node.text[text_index].length-1,
-                delay: 40
-            });
-        });
+            name.setText(node.name);
+            dia_text.setText(node.text[text_index]);
+        });     
     }
 };
