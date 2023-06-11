@@ -1,0 +1,12 @@
+{
+    "dialogue": {
+        "test":{
+            "name": "Thea",
+            "text": ["Testing dialogue from JSON file.", "Scrolling through text until end of screen."],
+            "next": "test2"
+        },
+        "test2":{
+            "text": ["This is the next message from the previous message."]
+        }
+    }
+}
