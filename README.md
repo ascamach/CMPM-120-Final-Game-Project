@@ -7,6 +7,8 @@
 This repo contatins the prototype for our core gameplay, and we plan to add the main game here.
 
 ## Core Gameplay Prototype
+Playable Link: https://ascamach.github.io/CMPM-120-Final-Game-Project/
+
 The core gameplay prototype is here in our main repo.
 - Audio: Audio sample made by our groupmate Ben for clicking on the screen. We used Mario Kart music as a sample for our looping music.
 - Visual: We used 2 Phaser Graphics objects for our visual assets. I used a sample image of Shinji Ikari and some pizza I found on the internet for our background images.
