@@ -19,4 +19,7 @@ Here is the link to our scene flow prototype repo: https://github.com/ascamach/c
 
 ...And here is the playable link: https://ascamach.github.io/cmpm-120-scene-flow/
 
+## Cinematics Prototype
+Here is the link to our cinematics prototype repo: https://github.com/BrandonJack9/love
 
+...and here is the playable link: https://brandonjack9.github.io/love/
